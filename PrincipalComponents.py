@@ -51,3 +51,31 @@ class PCA:
         self.s = s
         self.V = V
         self.T = T
+    def distribution(self, component=0, nbins=50, binmin=None, binmax=None):
+        """Returns a flattened histogram of data along the specified principal
+        component (defaults to the first)."""
+        # Handling default bounds
+        if binmin == None:
+            binmin = np.min(self.T[:,component])
+        if binmax == None:
+            binmax = np.max(self.T[:,component])
+        # Returning the distribution
+        [h, edges] = np.histogram(self.T[:,component],bins=nbins,
+                            range=(binmin, binmax))
+        axis = (edges[1:]-edges[:-1])/2 + edges[:-1]
+        return h, axis
+    def sample(self, x):
+        """returns a representative sample from the value x of the principal
+        components.
+        Parameters:
+        x - (float or list) The vector of principal components to be interpreted.
+            If an int, it's assumed the first component, if a list, it's
+            assumed to be a list of the first several components in order.
+            (components other than those listed are set to zero)."""
+        t = np.zeros(self.xbar.shape)
+        if type(x) == float:
+            t[0] = x
+        elif type(x) == list:
+            for i in range(len(x)):
+                t[i] = x[i]
+        return self.xbar + np.dot(t, np.linalg.inv(self.V))
