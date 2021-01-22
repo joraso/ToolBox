@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jan  6 15:56:53 2021
-Principal Component Analysis Tools
+Linear Algebra Analysis Tools
 @author: Joe Raso
 """
 
@@ -68,10 +68,10 @@ class PCA:
         """returns a representative sample from the value x of the principal
         components.
         Parameters:
-        x - (float or list) The vector of principal components to be interpreted.
-            If an int, it's assumed the first component, if a list, it's
-            assumed to be a list of the first several components in order.
-            (components other than those listed are set to zero)."""
+        x - (float or list) The vector of principal components to be
+            interpreted. If an int, it's assumed the first component, if a
+            list, it's assumed to be a list of the first several components
+            in order. (components other than those listed are set to zero)."""
         t = np.zeros(self.xbar.shape)
         if type(x) == float:
             t[0] = x

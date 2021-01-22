@@ -8,7 +8,7 @@ A very simple test case for principal component analysis.
 import sys
 sys.path.append('../')
 
-from PrincipalComponents import *
+from LinearMethods import *
 
 import matplotlib.pyplot as plt
 

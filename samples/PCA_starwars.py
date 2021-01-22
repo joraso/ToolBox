@@ -5,13 +5,13 @@ A slightly more complex example of PCA, applied to 538's Star Wars survey.
 [America’s Favorite ‘Star Wars’ Movies (And Least Favorite Characters)]
 (https://fivethirtyeight.com/features/americas-favorite-star-wars-movies-and-
 least-favorite-characters/).
-@author: promethustra
+@author: Joe Raso
 """
 
 import sys
 sys.path.append('../')
 
-from PrincipalComponents import *
+from LinearMethods import *
 
 import matplotlib.pyplot as plt
 
