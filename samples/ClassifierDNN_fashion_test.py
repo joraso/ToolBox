@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Jan 21 13:33:07 2021
-A simple example/test using the MNST fashion data set.
+A simple example/test using the MNIST fashion data set.
 https://github.com/zalandoresearch/fashion-mnist
 @author: Joe Raso
 """
