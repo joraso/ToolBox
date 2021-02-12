@@ -77,5 +77,5 @@ class PCA:
             t[0] = x
         elif type(x) == list:
             for i in range(len(x)):
-                t[i] = x[i]ty
+                t[i] = x[i]
         return self.xbar + np.dot(t, np.linalg.inv(self.V))

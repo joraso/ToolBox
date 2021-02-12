@@ -1,17 +1,14 @@
 # ToolBox
 
-This project is intended to be a collection of mostly independent functions and tools for data analysis and data science, as well as general algorithms and computer science stuff. This is built for my own education, and for potential rapid deployment of tools to projects I may undertake in the future. It also serves as a sort of notebook for me, as I acquire new computational skills, and codify the techniques I already know.
+This repository is intended to be a collection of general numerical analysis, applied math, computer science algorithms and methods. These are mostly for my own education, as a place to stach new computational/applied math methods I learn and codify the techniques I already know.
 
-Currently included is:
+### Currently included:
 - Principal Component Analysis
-- Classification DNN
 - Binary Tree Structure/Algorithms
-- AutoEncoder DNN
 
-Planned inclusions are:
+### Planned inclusions:
+- Numerical Calculus
 - Fast Fourier Transform
-- variational/convulutional Autoencoders
-- Support vector machines / classic ML methods
 - Multidimensional Linear Regression
 - Monte Carlo optimization
-- Gradient Descent optimization (normal and stochastic)
+- Gradient Descent (normal and stochastic)
