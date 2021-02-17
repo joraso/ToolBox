@@ -5,6 +5,7 @@ This repository is intended to be a collection of general numerical analysis, ap
 ### Currently included:
 - Principal Component Analysis
 - Binary Tree Structure/Algorithms
+- Miscellanious coding problems
 
 ### Planned inclusions:
 - Numerical Calculus
