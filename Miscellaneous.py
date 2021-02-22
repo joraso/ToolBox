@@ -7,6 +7,8 @@ Miscellanious coding problems I find interesting (or frustrating).
 
 import datetime
 
+# Problems that gave me complexity headaches ==================================
+
 def threeSum(nums):#: list[int]) -> list[list[int]]:
     """Given an array nums of n integers, are there elements a, b, c in nums
     such that a + b + c = 0? Find all unique triplets in the array which gives
@@ -65,17 +67,64 @@ def threeSum(nums):#: list[int]) -> list[list[int]]:
                 
     return combos
     
+def reverseString(s): #: List[str]) -> None
+    """A simple function to efficiently reverse a string, treated as a list of
+    printable characters. Does not return anything, instead modifies the string
+    in-place. """
+#    # Here is one way:
+#    end = len(s)-1
+#    def swap(place):
+#        nonlocal end
+#        # If we're not at the endo of the list,
+#        # continue bumping the character down
+#        if place < end:
+#            c = s.pop(place)
+#            s.insert(place+1, c)
+#            swap(place+1)
+#        # If the character has reached it's final position
+#        # adjust the endpoint and start from the top
+#        # (as long as we haven't reached the terminal
+#        # case where end==0.)
+#        elif place == end:
+#            end -= 1
+#            if end > 0:
+#                swap(0)
+#    swap(0)
+#    # This is too long in time though, O(n^2)
+                
+    # Here is another way that should work and be O(n):
+    # Make the endpoint is the middle of the list:
+    end = int(len(s)/2)-1
+    # Null escape:
+    if end < 0:
+        return
+    def swap(place):
+        nonlocal end
+        # Switch to characters in the string
+        c1 = s[place]; c2 = s[-place-1]
+        s[place] = c2; s[-place-1] = c1
+        # Recur if we're not at the middle yet:
+        if place < end:
+            swap(place+1)
+    swap(0)
+    
 if __name__ == "__main__":
+    
+    # Troubleshooting 3sum
     # The problem children inputs:
 #    nums = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 #            0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 #            1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 #    nums = [0,0,0]      
-    nums = [0,0,0,0]
+#    nums = [0,0,0,0]
 #    nums = [-2,0,1,1,2]
-    
-    tic = datetime.datetime.now()
-    print(threeSum(nums))
-    toc = datetime.datetime.now()
-    elapsed = float((toc-tic).total_seconds())
-    print("Time Elapsed: {} seconds".format(elapsed))
+#    tic = datetime.datetime.now()
+#    print(threeSum(nums))
+#    toc = datetime.datetime.now()
+#    elapsed = float((toc-tic).total_seconds())
+#    print("Time Elapsed: {} seconds".format(elapsed))
+
+    # Troubleshooting reverse string
+    a=[1,2,3,4,5,6,7]
+    reverseString(a)
+    print(a)
