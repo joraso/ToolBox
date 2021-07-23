@@ -1,14 +1,15 @@
 # ToolBox
 
-This repository is intended to be a personal notebook of numerical analysis, applied math, algorithmic pregramming methods --- a place to stash my notes and code for new methods as I acquire them and techniques I already know as I review them.
+This repository is intended to be a personal notebook of numerical analysis, applied math, and algorithmic pregramming methods --- a place to stash my notes and code for new methods as I acquire them and techniques I already know as I review them.
 
 ## Mathematics
 This folder is dedicated to applied math and numerical analysis methods.
 
-### Currently included:
+#### Currently included:
 - Principal Component Analysis
 
-### Planned inclusions:
+#### Planned inclusions:
+- Singular value decomposition
 - Numerical Calculus
 - Fast Fourier Transform
 - Multidimensional Linear Regression
@@ -18,7 +19,7 @@ This folder is dedicated to applied math and numerical analysis methods.
 ## Coding
 This folder is dedicated to algorithmic programming examples and practice.
 
-### Currently included:
+#### Currently included:
 - Binary Tree Structure/Algorithms
 - Linked List Structure/Algorithms
 - Miscellaneous coding problems
