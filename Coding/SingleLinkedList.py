@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb 17 13:38:04 2021
-Linked list algorithms
+Sigly linked list algorithms
 @author: Joe Raso
 """
 
@@ -10,6 +10,18 @@ class ListNode:
     def __init__(self, val=0, nex=None):
         self.val = val
         self.next = nex
+        
+def insertTail(head, data):
+    """Insert a value at the tail of the list/"""
+    # Using the iterative solution. Recursive also exists, but I don't
+    # think it offers any benifit in space/time complexity
+    if head is None: # First the initial/null case:
+        return ListNode(val=data)
+    node = head # Then the general case - scroll tot the end of the list
+    while node.next is not None:
+        node = node.next
+    node.next = ListNode(val=data) # tack on the new value
+    return head
         
 def constructList(vals):
     """Construct a linked list of ListNode odjects from a regular python
@@ -54,8 +66,9 @@ def swapPairs(head): #: ListNode) -> ListNode:
         print(newhead.val)
         return newhead
         
-def reverseList(head):
-    """Reverse a singly linked list."""
+def reverseList_recur(head):
+    """Reverse a singly linked list --- the recursive solution. This scales
+    as O(n) in time and O(n) in space."""
     def inout(node):
         # we'll need to pass the new head of the list back to the
         # parent function:
@@ -74,10 +87,24 @@ def reverseList(head):
             return node # pass up the tail of the reversed list
     inout(head)
     return head
+    
+def reverseList_iter(head):
+    """Reverse a singly linked list --- the iterative solution. This is O(n)
+    in time and O(1) in space."""
+    # Basic idea: Go along the old list, popping off the head, and adding it
+    # to the head of a new (now reversed) list.
+    oldhead = head; newhead = None
+    while oldhead is not None:
+        wnode = oldhead # grab the node to transfer
+        nexthead = oldhead.next # mark the next node
+        wnode.next = newhead # move the working node to the head of th new list
+        newhead = wnode #...and make it the new head
+        oldhead = nexthead # increment down the old list
+    return newhead
         
 if __name__ == "__main__":
     a = constructList([1,2,3,4,5,6])
     printList(a)
     #a = swapPairs(a)
-    a = reverseList(a)
+    a = reverseList_recur(a)
     printList(a)
