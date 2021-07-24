@@ -24,3 +24,9 @@ This folder is dedicated to algorithmic programming examples and practice.
 - Singly Linked List structure/algorithms
 - Sorting algorithms (merge/quick sort) 
 - Miscellaneous coding problems
+
+## Python
+This folder is dedicated to notes and snippits specific to Python usage.
+
+#### Currently incuded:
+- Example of an object with Built-In methods.
