@@ -22,5 +22,5 @@ This folder is dedicated to algorithmic programming examples and practice.
 #### Currently included:
 - Binary Tree structure/algorithms
 - Singly Linked List structure/algorithms
-- Sorting algorithms
+- Sorting algorithms (merge/quick sort) 
 - Miscellaneous coding problems
