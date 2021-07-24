@@ -20,6 +20,7 @@ This folder is dedicated to applied math and numerical analysis methods.
 This folder is dedicated to algorithmic programming examples and practice.
 
 #### Currently included:
-- Binary Tree Structure/Algorithms
-- Linked List Structure/Algorithms
+- Binary Tree structure/algorithms
+- Singly Linked List structure/algorithms
+- Sorting algorithms
 - Miscellaneous coding problems
