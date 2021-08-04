@@ -2,7 +2,7 @@
 """
 Created on Fri Jul 23 19:49:41 2021
 Sorting algorithms
-@author: promethustra
+@author: Joe Raso
 """
 
 def QuickSort(a):

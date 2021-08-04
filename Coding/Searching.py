@@ -2,7 +2,7 @@
 """
 Created on Tue Aug  3 10:49:35 2021
 Searching Algorithms
-@author: promethustra
+@author: Joe Raso
 """
 
 def BinarySearch(arr, el):

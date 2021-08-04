@@ -8,7 +8,7 @@ it's built in functionality as shown below.
 
 This allows you to create object that, for example, have defined behavior
 under +, -, *, or a predetermined way they print!
-@author: promethustra
+@author: Joe Raso
 """
 
 import math
