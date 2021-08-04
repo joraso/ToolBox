@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Jul 24 14:10:55 2021
-Practive implementing / example of python objects with built-in methods.
+Practive implementing / example of python operator overloading on python
+objects.
 
-Built in methods interact with the interpreter, and can be used to overload
-it's built in functionality as shown below.
-
-This allows you to create object that, for example, have defined behavior
-under +, -, *, or a predetermined way they print!
+One can 'overload' opterator for defined objects --- i.e. define their behavior
+under +, -, *, or ever the way they react to being printed!
 @author: Joe Raso
 """
 
@@ -48,6 +46,7 @@ class Complex(object):
         return result
         
 if __name__ == '__main__':
+
     c = Complex(1, 2)
     d = Complex(3, 2)
     print(c)
@@ -56,7 +55,7 @@ if __name__ == '__main__':
     
     print(c.mod())
     
-    # using the built in class
+    # comparing to the built-in class
     c = complex(1, 2)
     d = complex(3, 2)
     print(c)

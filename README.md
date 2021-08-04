@@ -30,4 +30,4 @@ This folder is dedicated to algorithmic programming examples and practice.
 This folder is dedicated to notes and snippits specific to Python usage.
 
 #### Currently incuded:
-- Example of an object with Built-In methods.
+- Example of an overloading operators for a custom object.
