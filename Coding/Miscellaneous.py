@@ -66,7 +66,9 @@ def threeSum(nums):#: list[int]) -> list[list[int]]:
                     j += 1
                 
     return combos
-    
+
+# Problems that are good to remember ==========================================
+
 def reverseString(s): #: List[str]) -> None
     """A simple function to efficiently reverse a string, treated as a list of
     printable characters. Does not return anything, instead modifies the string
@@ -108,6 +110,87 @@ def reverseString(s): #: List[str]) -> None
             swap(place+1)
     swap(0)
     
+# Problems that gave me design headaches ======================================
+
+def knightlOnAChessboard(n):
+    """KnightL(i,j) is a chess piece that moves in an L-shape according
+    to integers i and j. This challenge is two-fold:
+        1. Enumerate the KnightL(i,j) pieces that are possible on a 
+           square board of side length n,
+        2. For each possible KnightL, find the minimum number of moves
+           to cross th board diagonally, from (0,0) to (n-1, n-1).
+    should return a nested nxn array containing the minimum number of moves
+    mentionen in (2); result[i,j] = minimum moves of KnightL(i,j) on
+    the board of side length n."""
+    
+    # The duel nature of this problem gave took me a long time to solve.
+    # Mainly, the design challenge lay in finding the way to calculate
+    # minmoves() --- which I solved with some stat-mech like thinking.
+    # My solution just advances all possible trajectories that don't 
+    # include backtracking to a space already visited until either the
+    # end space is reached (and we've arrived in the minimum number of 
+    # moves or no more valid moves exist (there is no solution).
+    
+    # The secondary part --- avoiding recalculating minmoves() for redundant
+    # KnightL combinations was also a bit of a head-scratcher without using,
+    # numpy, but I think what came up with is this is an example of what
+    # people call 'dynamic programming'?
+    
+    # First some component functions
+    def onboard(space, n):
+        """Define whether a given set of coordinates are on a board of side
+        length n."""
+        return (space[0]<n and space[1]<n and space[0]>=0 and space[1]>=0)
+    def minmoves(i, j, n):
+        """Find the minimum number of moves across the board of side length 
+        n with KnightL(i, j)"""
+        # There are 8 possible moves for the knight in the middle of the board
+        moves = [(i, j), (j, i), (-i, j), (j, -i),
+                 (i, -j), (-j, i), (-i, -j), (-j, -i)]
+        # Track the current location(s) of the trajectories
+        # The spaces already visited (to avoid loops)
+        # and the number of steps in the current set of trajectories
+        locs = [(0,0)]; visited =[]; steps = 0
+        # grow trajectories until a solution is found
+        while True:
+#            print(f"Step {steps}")
+            nextlocs = []
+            for loc in locs:
+                for m in moves:
+                    s = (loc[0]+m[0], loc[1]+m[1])
+                    # check if these next steps are:
+                    # (a) possible and/or (b) not already visited
+                    if onboard(s, n) and (s not in visited):
+                        # if so, progress the trajectories to the new location
+                        nextlocs.append(s); visited.append(s)
+#                        print(f"{loc}->{s}")
+            # progress all trajectories one step
+            locs = nextlocs; steps += 1
+            # check if any have reacked the target location
+            if (n-1, n-1) in locs:
+                return steps
+            # if all trajectories have moved off the board,
+            # no solutions exist.
+            elif len(locs) == 0:
+                return -1
+    # Initiate the result matrix with zeros
+    result = []
+    # enumerate all possible KnightL objects on board of size n
+    # note that KnightL(i,j)=KnightL(j,i), so we can reuse values 
+    for i in range(1, n):
+        line = []
+        for j in range(1, i):
+#            print(f"Filling at {i}, {j}")
+            line.append(result[j-1][i-1])
+        for j in range(i, n):
+#            print(f"Calculating at {i}, {j}")
+            m = minmoves(i, j, n)
+            line.append(m)
+        result.append(line)
+#        print(result)
+    return result
+
+    
 if __name__ == "__main__":
     
     # Troubleshooting 3sum
@@ -125,6 +208,12 @@ if __name__ == "__main__":
 #    print("Time Elapsed: {} seconds".format(elapsed))
 
     # Troubleshooting reverse string
-    a=[1,2,3,4,5,6,7]
-    reverseString(a)
-    print(a)
+#    a=[1,2,3,4,5,6,7]
+#    reverseString(a)
+#    print(a)
+
+    # Troubleshooting knightlOnAChessboard()
+    r = knightlOnAChessboard(5)
+    ans = [[4, 4, 2, 8], [4, 2, 4, 4], [2, 4, -1, -1], [8, 4, -1, 1]]
+    print(ans==r)
+    # An
