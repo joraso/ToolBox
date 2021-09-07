@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Sep  7 12:10:46 2021
-Sample creation/usage of decorators, with an examples: basic sample, timer and
-call log decorators.
+Sample creation/usage of decorators, with an examples: basic sample, timer,
+call log, and repeater decorators.
 @author: Joe Raso
 """
 
@@ -53,6 +53,27 @@ def myLog(func):
         return func(*args, **kwargs)
     return wrapper
     
+# Decorators can also take inputs of their own, and hold functional states:
+def myRepeater(n):
+    """Decorator that repeats the decorated function n times. (The decorated
+    function is made to return only the output of it's final call.)"""
+    # This is achieved by making a function that returns an instance of a
+    # decorator, which in turn returns the wrapper. When called with an
+    # argument, it in fact returns a decorator instance with the state and
+    # variable given.
+    def repeated_decoration(func):
+#        @functools.wraps(func) # we'd put this here if we wanted to preserve
+        # the call signature of the wrapped function.
+        def repeat_wrapper(*args, **kwargs):
+            for i in range(n):
+                out = func(*args, **kwargs)
+            return out
+        return repeat_wrapper
+    return repeated_decoration
+    
+# Also note that a class can be used as a decorator if a .__call__() function
+# is implemented.
+    
 if __name__ == '__main__':
 
     # functions are decorated by putting the '@decorator' statement directly
@@ -71,3 +92,11 @@ if __name__ == '__main__':
         print(f"{x} + {y} = {x+y}")
         return x+y
     a = example2(3, 5, test=True)
+    
+    print(50*'-')
+    
+    # An example of a decorator taking an argument:
+    @myRepeater(5)
+    def example3():
+        print("Hello Again!")
+    example3()
