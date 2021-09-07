@@ -33,3 +33,4 @@ This folder is dedicated to notes and snippits specific to Python usage.
 - Example of an overloading operators for a custom object.
 - PyQt practice and examples, including:
     - A simple "Hello World" popup, demonstrating very basic usage.
+    - A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
