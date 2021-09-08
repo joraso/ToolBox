@@ -33,6 +33,7 @@ This folder is dedicated to notes and snippits specific to Python usage.
 - Example of an overloading operators for a custom object.
 - Sample usage of decorators, with an example timer, log and repeater decorators.
 - Basic creation/usage of a generator, with Fibonacci number example.
+- Basic creation/usage of a context manager.
 - PyQt practice and examples, including:
     - A simple "Hello World" popup, demonstrating very basic usage.
     - A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
