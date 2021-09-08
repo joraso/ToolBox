@@ -40,6 +40,7 @@ class Graph:
         """Prints a summary of the nodes and their connections."""
         for node in self.nodes:
             print(f"{node} -> {node.paths}")
+            
     def DepthFirstSearch(self, value, head=0):
         """Performs a depth-first search of the graph for 'value'. Defaults
         to starting at node 0. Returns the node containing the value and an
@@ -63,6 +64,7 @@ class Graph:
                     else: return result
         # Recur to find the path, starting at the indicated head.
         return search(self.nodes[head], value, pathlen)
+        
     def BreadthFirstSearch(self, value, head=0):
         """Performs a breadth-first search of the graph for 'value'. Defaults
         to starting at node 0. Returns the node containing the value and an
@@ -87,12 +89,39 @@ class Graph:
             queue = nexqueue; nexqueue = []; pathlen += 1
         return None
         
+    def FindIslands(self):
+        """Finds all the islands of interconnected nodes on the graph
+        returning a list of lists of nodes."""
+        # The way to accomplish this will be with depth-first search
+        notvisited = self.nodes.copy(); island = []
+        def explore(node):
+            nonlocal notvisited, island
+            # Proceed only if we have never been to this node.
+            if node in notvisited:
+                # Mark as visited
+                notvisited.remove(node)
+                island.append(node)
+                # and explore it's connections
+                for child in node.paths:
+                    explore(child)
+        # Explore all the islands
+        islands = []
+        while len(notvisited)>0:
+            explore(notvisited[0])
+            islands.append(island.copy())
+            island = []
+        return islands
+
 
 if __name__ == '__main__':
     
-    g = Graph(['A','B','C','D'],[(0,1),(0,2),(1,2),(2,3)], directed=False)
-    g.summary()
-    
+#    g = Graph(['A','B','C','D'],[(0,1),(0,2),(1,2),(2,3)], directed=False)
+#    g.summary()
 #    result = g.DepthFirstSearch('D')
-    result = g.BreadthFirstSearch('D')
-    print(result)
+#    result = g.BreadthFirstSearch('D')
+#    print(result)
+    
+    g2 = Graph(['A','B','C','D', 'E', 'F'],
+               [(1,2),(3,4),(4,5),(5,3)], directed=False)
+    g2.summary()
+    print(g2.FindIslands())
