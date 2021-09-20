@@ -54,9 +54,9 @@ def TrueFalseBox(question):
     label = QLabel(question)
     outerlayout.addWidget(label)
     outerlayout.addWidget(buttonbox)
+    window.setLayout(outerlayout)
     
     # Exicute the window
-    window.setLayout(outerlayout)
     window.show()
     app.exec()
     return ans
