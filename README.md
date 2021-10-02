@@ -40,4 +40,4 @@ This folder is dedicated to notes and snippits specific to Python usage.
     - A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
     - A simple calculator app with grid layout and line edit usage.
     - A simple list maker widget, demonstrating the basic model/viewer architecture paradigm.
-    - A more complex CSV viewer/editor project (currently under construction), making use of QTables, File dialogs, QTabWidget, QMainWindow, and QToolBar.
+    - A more complex CSV viewer/editor project (currently under construction), making use of QTables, QFileDialog, QTabWidget, QMainWindow, and QToolBar.

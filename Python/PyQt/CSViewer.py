@@ -5,13 +5,13 @@ Created on Tue Sep 21 10:02:50 2021
 CSViewer - a very simple application for opening and viewing/editing csv files.
 
 This is a work in progress, and currently supports:
-- Opening csv files, and creating empty tables
-- Editing data and column names
+- Opening csv files, and creating empty tables,
+- Ability to saving tables to csv,
+- Editing data and column names,
 - Inserting/deleting new columns/rows.
 
 Features that still need to be added to complete the project:
 - Ability to move/rearrange rows and columns
-- Ability to save tables to csv
 
 The new Qt elements experimented with here are:
 - QTables
@@ -92,7 +92,7 @@ class csvmodel(QtCore.QAbstractTableModel):
         self.endRemoveColumns()
         
     # These are not standard subclassing functions, but I'm implementing them
-    # here to put values into the underlying DataFrame.
+    # here to put values into the underlying DataFrame, and save it as a csv.
     def editItem(self, index, value):
         self.csv.iloc[index.row(), index.column()] = value
         self.layoutChanged.emit() # Emit a layout change signal
@@ -100,6 +100,8 @@ class csvmodel(QtCore.QAbstractTableModel):
         newname = {self.csv.columns[index.column()]:value}
         self.csv.rename(columns=newname, inplace=True)
         self.layoutChanged.emit() # Emit a layout change signal
+    def saveAs(self, fname):
+        self.csv.to_csv(fname)
     
 class CSViewer(QtWidgets.QMainWindow):
     def __init__(self, *args, file=None, **kwargs):
@@ -140,6 +142,7 @@ class CSViewer(QtWidgets.QMainWindow):
         # 'Functor' object should be the functional action called.
         self.openButton = self.bar.addAction("Open", self.openTab)
         self.newButton = self.bar.addAction("New", self.newTab)
+        self.saveButton = self.bar.addAction("Save", self.saveTab)
         self.addRowButton = self.bar.addAction("+Row", self.addRow)
         self.delRowButton = self.bar.addAction("-Row", self.delRow)
         self.addColButton = self.bar.addAction("+Col", self.addColumn)
@@ -173,6 +176,13 @@ class CSViewer(QtWidgets.QMainWindow):
         # want to open a tab if the user selected a file, so:
         if fpath_tuple[0]:
             self.newTab(fpath=fpath_tuple[0])
+        
+    def saveTab(self):
+        """Saves the currentl selected tab."""
+        # As in openTab, but with the SaveFileName instead
+        fpath_tuple = QtWidgets.QFileDialog.getSaveFileName()
+        if fpath_tuple[0]:
+            self.tabs.currentWidget().model().saveAs(fpath_tuple[0])
         
     def closeTab(self, currentIndex):
         """Closes a tab."""
