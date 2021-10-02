@@ -2,12 +2,12 @@
 """
 Created on Tue Sep 21 10:02:50 2021
 
-CSViewer - a very simple window for opening and viewing/editing csv files.
+CSViewer - a very simple application for opening and viewing/editing csv files.
 
 This is a work in progress, and currently supports:
-- Opening csv files, and creating emply tables
+- Opening csv files, and creating empty tables
 - Editing data and column names
-- Inserting new columns/rows.
+- Inserting/deleting new columns/rows.
 
 Features that still need to be added to complete the project:
 - Ability to move/rearrange rows and columns
@@ -15,7 +15,7 @@ Features that still need to be added to complete the project:
 
 The new Qt elements experimented with here are:
 - QTables
-- File dialogs
+- QFileDialog
 - QTabWidget
 - QMainWindow
 - QToolBar
@@ -34,7 +34,7 @@ class csvmodel(QtCore.QAbstractTableModel):
     def __init__(self, *args, fpath=None, **kwargs):
         super().__init__(*args, **kwargs)
         if fpath: self.csv = pd.read_csv(fpath)
-        else: self.csv = pd.DataFrame()
+        else: self.csv = pd.DataFrame([0])
     def data(self, index, role):
         if role == QtCore.Qt.DisplayRole:
             # Wierdly, DisplayRole only supports strings
@@ -69,16 +69,30 @@ class csvmodel(QtCore.QAbstractTableModel):
         """Inserts (1) column into the table after (column)."""
         # Mandatory begin statement. Note the double refence to column and
         # the lack of refence to count (it's a dummy argument currently).
-        self.beginInsertColumns(QtCore.QModelIndex(), column, column)
+        self.beginInsertColumns(QtCore.QModelIndex(), column, column + count-1)
         # On the Pandas end, we do this by concatentation, as in insertRow
         insert = pd.Series(index=self.csv.index, dtype=float)
         newcsv = pd.concat([self.csv[self.csv.columns[:column]], insert,
                             self.csv[self.csv.columns[column:]]], axis=1)
         self.csv = newcsv
         self.endInsertColumns() # Mandatory end statement
+    def removeRows(self, row, count):
+        """Removes (count) rows at (row)."""
+        self.beginRemoveRows(QtCore.QModelIndex(), row, row + count)
+        # Remove rows using 'drop' in Pandas
+        self.csv.drop(labels=range(row,row+count), axis=0, inplace=True)
+        self.csv.reset_index()
+        self.endRemoveRows()
+    def removeColumns(self, column, count):
+        """Removes (1) column at (column)."""
+        self.beginRemoveColumns(QtCore.QModelIndex(), column, column + count-1)
+        # Remove rows using 'drop' in Pandas
+        self.csv.drop(columns=self.csv.columns[column:column + count],
+                      axis=0, inplace=True)
+        self.endRemoveColumns()
         
     # These are not standard subclassing functions, but I'm implementing them
-    # here to put values into the underlying DataFrame
+    # here to put values into the underlying DataFrame.
     def editItem(self, index, value):
         self.csv.iloc[index.row(), index.column()] = value
         self.layoutChanged.emit() # Emit a layout change signal
@@ -127,15 +141,16 @@ class CSViewer(QtWidgets.QMainWindow):
         self.openButton = self.bar.addAction("Open", self.openTab)
         self.newButton = self.bar.addAction("New", self.newTab)
         self.addRowButton = self.bar.addAction("+Row", self.addRow)
+        self.delRowButton = self.bar.addAction("-Row", self.delRow)
         self.addColButton = self.bar.addAction("+Col", self.addColumn)
+        self.delColButton = self.bar.addAction("-Col", self.delCol)
         # Toolbars also allow for Widgets like the input entry field
         self.bar.addWidget(self.inputEntrySpace())
         # We'll use a simple 
         return self.bar
         
     def newTab(self, fpath=None):
-        """Opens a new tab. If no file path is specified, defaults to an empty
-        tab."""
+        """Opens a new tab. If no file path is specified, opens an empty CSV."""
         model = csvmodel(fpath=fpath)
         view = QtWidgets.QTableView()
         view.setModel(model)
@@ -144,7 +159,7 @@ class CSViewer(QtWidgets.QMainWindow):
         # Set up what happens when a column header is clicked:
         view.horizontalHeader().sectionClicked.connect(self.displayColumnName)
         # We want to name the tab, so we'll strip the file name from the end
-        # of the file path. If this is a blank tab, then we call it 'untitled'.
+        # of the file path. If this is a blank tab, then we call it 'untitled'. 
         fname = "untitled" if not fpath else fpath.split('/')[-1]
         self.tabs.addTab(view, fname)        
         
@@ -223,11 +238,26 @@ class CSViewer(QtWidgets.QMainWindow):
         tab = self.tabs.currentWidget()
         col = tab.selectionModel().currentIndex().column()
         tab.model().insertColumn(col, 1)
-        tab.model().layoutChanged.emit()
         tab.selectColumn(col)
+        tab.model().layoutChanged.emit()
+    
+    def delRow(self):
+        """Deletes the selected row."""
+        tab = self.tabs.currentWidget()
+        row = tab.selectionModel().currentIndex().row()
+        tab.model().removeRows(row, 1)
+        tab.model().layoutChanged.emit()
+        
+    def delCol(self):
+        """Deletes the selected column."""
+        tab = self.tabs.currentWidget()
+        col = tab.selectionModel().currentIndex().column()
+        tab.model().removeColumns(col, 1)
+        tab.model().layoutChanged.emit()
         
 if __name__ == '__main__':
     
     win = CSViewer(file="Aesop.csv")
-    win.show(); app.exec()
+    win.show()
+    app.exec()
 #    csv = pd.read_csv("Aesop.csv")
