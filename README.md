@@ -35,9 +35,13 @@ This folder is dedicated to notes and snippits specific to Python usage.
 - Sample usage of decorators, with an example timer, log and repeater decorators.
 - Basic creation/usage of a generator, with Fibonacci number example.
 - Basic creation/usage of a context manager.
-- PyQt practice and examples, including in increasing complexity:
-    - A simple "Hello World" popup, demonstrating very basic usage.
-    - A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
-    - A simple calculator app with grid layout and line edit usage.
-    - A simple list maker widget, demonstrating the basic model/viewer architecture paradigm.
-    - A more complex CSV viewer/editor project (currently under construction), making use of QTables, QFileDialog, QTabWidget, QMainWindow, and QToolBar.
+
+## PyQt
+PyQt practice and examples.
+
+#### Currently incuded:
+- A simple "Hello World" popup, demonstrating very basic usage.
+- A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
+- A simple calculator app with grid layout and line edit usage.
+- A simple list maker widget, demonstrating the basic model/viewer architecture paradigm.
+- A more complex CSV viewer/editor project (currently under construction), making use of QTables, QFileDialog, QTabWidget, QMainWindow, and QToolBar.
