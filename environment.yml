@@ -1,0 +1,11 @@
+---
+name: toolbox
+dependencies:
+  - python=3.9
+  - notebook=6.5.4
+  - pyqt=5.15.10
+  - numpy=1.26.4
+  - pandas=2.2.1
+  - matplotlib=3.8.4
+  - pytorch=2.2.0
+  - tensorflow=2.4.1
