@@ -1,6 +1,6 @@
 # ToolBox
 
-This repository is intended to be a personal notebook of numerical analysis, applied math, and algorithmic pregramming methods --- a place to stash my notes and code for new methods as I acquire them and techniques I already know as I review them.
+This repository is intended to be a personal notebook of numerical analysis, applied math, and algorithmic programming methods - a place to stash my notes and code for new methods as I acquire them and techniques I already know as I review them.
 
 ## Mathematics
 This folder is dedicated to applied math and numerical analysis methods.
@@ -30,16 +30,29 @@ This folder is dedicated to algorithmic programming examples and practice.
 ## Python
 This folder is dedicated to notes and snippits specific to Python usage.
 
-#### Currently incuded:
+#### Currently included:
 - Example of an overloading operators for a custom object.
 - Sample usage of decorators, with an example timer, log and repeater decorators.
 - Basic creation/usage of a generator, with Fibonacci number example.
 - Basic creation/usage of a context manager.
 
+## MachineLearning
+This folder is dedicated to notes on machine learning algorithms and packaged.
+
+#### Currently Included:
+- Example/snippet of how to construct a basic PyTorch model
+
+#### Planned inclusions:
+- Example/snippet of how to construct a basic TensorFlow model
+- Illustration of Random Forest algorithm.
+- Illustration of SVM algorithms.
+- Illustration of Graph NNs (m).
+- Illustration of Transformers.
+
 ## PyQt
 PyQt practice and examples.
 
-#### Currently incuded:
+#### Currently included:
 - A simple "Hello World" popup, demonstrating very basic usage.
 - A True/False popup quiz with rudimentary layouts, buttons, and simple signal/slot usage.
 - A simple calculator app with grid layout and line edit usage.
