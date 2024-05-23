@@ -8,3 +8,5 @@ dependencies:
   - pandas=2.2.1
   - matplotlib=3.8.4
   - pytorch=2.2.0
+  - pip:
+    - rdkit==2023.9.5

@@ -49,6 +49,17 @@ This folder is dedicated to notes on machine learning algorithms and packaged.
 - Illustration of Graph NNs (m).
 - Illustration of Transformers.
 
+## Cheminformatics
+Folder for sum useful cheminformatics snippets
+
+#### Currently Included:
+- Example/snippet of how to RDKit-featurize a molecule
+
+#### Planned inclusions:
+- Example/snippet of how to get fingerprints/Tanimoto distance
+- Example/snippet of file type conversion with OpenBabel
+- Molecular graph conversion?
+
 ## PyQt
 PyQt practice and examples.
 
